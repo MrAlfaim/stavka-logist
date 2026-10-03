@@ -11,9 +11,7 @@
 <meta property="og:image" content="favicon.png">
 <link rel="icon" type="image/png" href="favicon.png">
 <title>Ставка для экспедиторов</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Unbounded:wght@600;800&display=swap">
+<link rel="stylesheet" href="fonts.css">
 <style>
 /* Layout: накладная CMR как герой — графы документа, суммы по плечам, итог; дальше спокойные графы-разделы */
 :root{
@@ -91,6 +89,32 @@ a{color:var(--stamp)}
 
 footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--rule);padding-top:20px;font-size:13px;color:var(--ink-2)}
 
+/* ролик: грузится только по нажатию (preload=none) */
+.demo{display:grid;gap:18px}
+.demo video{width:100%;height:auto;display:block;border:1.5px solid var(--ink);background:var(--sheet);aspect-ratio:16/9}
+
+/* частые вопросы */
+.faq{border-top:1.5px solid var(--ink)}
+.faq details{border-bottom:1px solid var(--rule)}
+.faq summary{cursor:pointer;list-style:none;padding:16px 4px;font-weight:600;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-family:var(--mono);color:var(--orange);font-size:20px;line-height:1}
+.faq details[open] summary::after{content:'–'}
+.faq .a{padding:0 4px 18px;display:grid;gap:10px;color:var(--ink-2);font-size:16px}
+.faq .a p{max-width:70ch}
+
+/* синее окно Windows: как выглядит и куда нажать (рисунок, не скриншот) */
+.ss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:4px}
+.ss figure{margin:0;display:grid;gap:8px}
+.ss figcaption{font-size:14px;color:var(--ink-2)}
+.ss-win{background:#0b5394;color:#fff;padding:18px 18px 14px;font:13px/1.45 'Segoe UI',system-ui,sans-serif;min-height:170px;display:grid;align-content:space-between;gap:10px;border-radius:2px}
+.ss-win b{font-size:17px;font-weight:600;display:block;margin-bottom:6px}
+.ss-win .lnk{text-decoration:underline}
+.ss-win .row{display:flex;justify-content:flex-end;gap:8px}
+.ss-win .b{border:1px solid #fff;padding:4px 14px;font-size:12px}
+.ss-hit{outline:3px solid #ffb84d;outline-offset:3px;border-radius:2px}
+@media (max-width:540px){.ss{grid-template-columns:minmax(0,1fr)}}
+
 @media (max-width:860px){
   .hero,.who,.access{grid-template-columns:minmax(0,1fr)}
   .access > div + div{border-left:0;border-top:1.5px solid var(--ink)}
@@ -122,7 +146,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
       <p>Вводите плечи в юанях, долларах или рублях — курс ЦБ подтягивается сам. Программа складывает маршрут, услуги и маржу и пишет готовое письмо клиенту. Его остаётся скопировать в мессенджер.</p>
       <div class="cta-row">
         <a class="btn btn-main" href="#access">Скачать и попробовать</a>
-        <a class="btn btn-ghost" href="#features">Что умеет</a>
+        <a class="btn btn-ghost" href="#demo">Посмотреть ролик</a>
       </div>
     </div>
 
@@ -138,6 +162,17 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
       </div>
       <figcaption class="note">Цифры условные — для примера.</figcaption>
     </figure>
+  </section>
+
+  <section class="demo" id="demo" aria-labelledby="h-d">
+    <div style="display:grid;gap:10px">
+      <span class="label">Минута на знакомство</span>
+      <h2 id="h-d">Как это выглядит в работе</h2>
+    </div>
+    <video controls preload="none" poster="demo-poster.jpg" width="1280" height="720">
+      <source src="stavka-demo.mp4" type="video/mp4">
+      Ваш браузер не показывает видео — <a href="stavka-demo.mp4">скачать ролик</a> (6 МБ).
+    </video>
   </section>
 
   <section class="section" id="features" aria-labelledby="h-f">
@@ -169,6 +204,73 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
     </ul>
   </section>
 
+  <section class="section" id="faq" aria-labelledby="h-q">
+    <div style="display:grid;gap:10px">
+      <span class="label">Частые вопросы</span>
+      <h2 id="h-q">Перед тем как скачать</h2>
+    </div>
+    <div class="faq">
+      <details id="smartscreen">
+        <summary>Windows пишет «Система Windows защитила ваш компьютер»</summary>
+        <div class="a">
+          <p>Так Windows встречает любую новую программу без платной цифровой подписи. Окно появляется один раз — при первом запуске скачанного файла. Обновления его уже не вызывают.</p>
+          <div class="ss">
+            <figure>
+              <div class="ss-win" aria-hidden="true"><div><b>Система Windows защитила ваш компьютер</b>Фильтр SmartScreen в Microsoft Defender предотвратил запуск неопознанного приложения…<br><span class="lnk ss-hit">Подробнее</span></div><div class="row"><span class="b">Не выполнять</span></div></div>
+              <figcaption>1. Нажмите «Подробнее»</figcaption>
+            </figure>
+            <figure>
+              <div class="ss-win" aria-hidden="true"><div><b>Система Windows защитила ваш компьютер</b>Приложение: LogisticsCalculator.exe<br>Издатель: Неизвестный издатель</div><div class="row"><span class="b ss-hit">Выполнить в любом случае</span><span class="b">Не выполнять</span></div></div>
+              <figcaption>2. «Выполнить в любом случае»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Это безопасно? Антивирус ругается</summary>
+        <div class="a">
+          <p>Перед выпуском я проверяю каждую версию на VirusTotal — это около 70 антивирусов. Новые программы без платной подписи иногда ошибочно помечаются как подозрительные. О таких случаях я сообщаю производителю антивируса.</p>
+          <p>Обновления подписаны: программа устанавливает только версии, подписанные автором, и проверяет, что файл скачался целиком. Если антивирус удалил программу — напишите мне.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Где хранятся мои расчёты и клиенты?</summary>
+        <div class="a">
+          <p>Только на вашем компьютере, в папке рядом с программой. Расчёты, клиентов и историю ставок программа никуда не отправляет.</p>
+          <p>В интернет она ходит за курсом ЦБ и за обновлениями. Если вы сами нажмёте «Написать автору», уйдёт только ваш текст и технические данные. Их вы видите до отправки.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Нужно ли устанавливать? Куда положить файл?</summary>
+        <div class="a">
+          <p>Устанавливать не нужно — это один файл. Положите его в отдельную папку, например «Документы\Ставка», и запускайте оттуда. Рядом программа хранит историю и настройки. Из архива и прямо из «Загрузок» лучше не запускать: так история может потеряться.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Нужен ли интернет?</summary>
+        <div class="a">
+          <p>Нужен, чтобы подтянуть курс ЦБ и получить обновления. Без интернета программа тоже считает: курс можно ввести вручную.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Есть версия для Mac или телефона?</summary>
+        <div class="a"><p>Пока только Windows 10 и 11. Веб-версия, в которой можно считать с любого устройства, в планах.</p></div>
+      </details>
+      <details>
+        <summary>Что будет, когда закончится тест?</summary>
+        <div class="a">
+          <p>Программа покажет экран продления. Все расчёты, история и шаблоны останутся на месте. Чтобы продлить, пришлите мне в Telegram код с этого экрана — в ответ придёт новый ключ.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Как перенести программу на другой компьютер?</summary>
+        <div class="a">
+          <p>Напишите мне — выдам ключ для нового компьютера. Историю можно выгрузить в Excel, а перенос всех данных одной кнопкой появится в одной из следующих версий. Пока помогу перенести вручную.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
   <section class="access" id="access" aria-labelledby="h-a">
     <div>
       <span class="label">Ранний доступ</span>
@@ -189,7 +291,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
         <button class="btn btn-ghost" id="copyBtn" type="button">Скопировать ник</button>
       </div>
       <div class="copied" id="copyMsg" role="status"></div>
-      <p class="note">Windows 10/11 · около 40 МБ. Если Windows покажет «Система Windows защитила ваш компьютер» — нажмите «Подробнее» → «Выполнить в любом случае»: у программы пока нет платной цифровой подписи.</p>
+      <p class="note">Windows 10/11 · около 40 МБ. Если Windows покажет «Система Windows защитила ваш компьютер» — нажмите «Подробнее» → «Выполнить в любом случае» (<a href="#smartscreen" id="ssLink">как это выглядит</a>).</p>
     </div>
   </section>
 
@@ -203,6 +305,8 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
 (function(){
   var btn = document.getElementById('copyBtn'), msg = document.getElementById('copyMsg'), h = document.getElementById('handle');
   function select(){ var r = document.createRange(); r.selectNodeContents(h); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+  var ss = document.getElementById('smartscreen');
+  document.getElementById('ssLink').addEventListener('click', function(){ ss.open = true; });
   btn.addEventListener('click', function(){
     var text = h.textContent.trim();
     var done = function(){ msg.textContent = 'Ник скопирован'; };
