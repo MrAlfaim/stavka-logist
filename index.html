@@ -302,11 +302,32 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
 </div>
 
 <script>
+/* Сайт всегда открывается сверху. На телефоне он открывался внизу: после «Скачать и попробовать» в адресе
+   оставалось #access, и при повторном открытии (история, закладка, пересланная ссылка) страница прыгала к блоку
+   внизу; к тому же браузер телефона возвращал прошлую прокрутку. Поэтому: ссылки внутри страницы прокручивают
+   плавно и адрес не меняют, а при открытии #… убирается и страница встаёт наверх. */
+(function(){
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  window.scrollTo(0, 0);
+  window.addEventListener('pageshow', function(e){ if (e.persisted) window.scrollTo(0, 0); });
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var el = document.getElementById(a.getAttribute('href').slice(1));
+    if (!el) return;
+    e.preventDefault();
+    if (el.tagName === 'DETAILS') el.open = true;
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var y0 = window.scrollY;
+    el.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start'});
+    // плавная прокрутка не сработала (бывает в свёрнутых/встроенных браузерах) — сразу к блоку
+    setTimeout(function(){ if (Math.abs(window.scrollY - y0) < 2) el.scrollIntoView({block: 'start'}); }, 700);
+  });
+})();
 (function(){
   var btn = document.getElementById('copyBtn'), msg = document.getElementById('copyMsg'), h = document.getElementById('handle');
   function select(){ var r = document.createRange(); r.selectNodeContents(h); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
-  var ss = document.getElementById('smartscreen');
-  document.getElementById('ssLink').addEventListener('click', function(){ ss.open = true; });
   btn.addEventListener('click', function(){
     var text = h.textContent.trim();
     var done = function(){ msg.textContent = 'Ник скопирован'; };
