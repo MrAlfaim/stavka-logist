@@ -280,7 +280,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
       <p style="color:var(--ink-2)">Сейчас программа работает на Windows. Готовлю веб-версию с личным кабинетом, чтобы считать с любого компьютера. Первым пользователям — бесплатный доступ на время тестирования и особая цена после.</p>
       <ul class="terms">
         <li><b>01</b><span>Скачайте программу — один файл для Windows, установка не нужна</span></li>
-        <li><b>02</b><span>Запустите и пришлите в Telegram код с экрана — в ответ придёт ключ на тест</span></li>
+        <li><b>02</b><span>Запустите и нажмите «Получить пробный ключ» — бот в Telegram сразу пришлёт ключ на 14 дней</span></li>
         <li><b>03</b><span>Новые версии приходят сами, ваши замечания войдут в следующую</span></li>
       </ul>
     </div>
@@ -289,12 +289,24 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
       <div class="handle" id="handle">@mr_Alfaim</div>
       <div class="cta-row">
         <a class="btn btn-main" href="https://github.com/MrAlfaim/stavka-releases/releases/latest/download/LogisticsCalculator.exe" download>Скачать для Windows</a>
-        <a class="btn btn-ghost" href="https://t.me/mr_Alfaim" target="_blank" rel="noopener">Открыть Telegram</a>
+        <a class="btn btn-ghost" href="https://t.me/stavka_trial_bot" target="_blank" rel="noopener">Пробный ключ на 14 дней</a>
+        <a class="btn btn-ghost" href="https://t.me/mr_Alfaim" target="_blank" rel="noopener">Написать автору</a>
         <button class="btn btn-ghost" id="copyBtn" type="button">Скопировать ник</button>
       </div>
+      <p class="note">Ключ — сразу, в Telegram-боте: запустите программу, нажмите «Получить пробный ключ» на экране активации
+        (или отправьте боту код компьютера) — в ответ придёт ключ на 14 дней.</p>
       <div class="copied" id="copyMsg" role="status"></div>
       <p class="note">Windows 10/11 · около 26 МБ. Если Windows покажет «Система Windows защитила ваш компьютер» — нажмите «Подробнее» → «Выполнить в любом случае» (<a href="#smartscreen" id="ssLink">как это выглядит</a>).</p>
     </div>
+  </section>
+
+  <section class="privacy-note" id="privacy" aria-label="Конфиденциальность">
+    <p class="note"><b>Конфиденциальность.</b> Программа хранит расчёты, историю и клиентов только у вас на компьютере.
+      При активации ключа она сообщает нашему серверу лишь номер ключа и код компьютера — без данных о расчётах.
+      Бот пробных ключей сохраняет ваше имя и ник в Telegram, номер аккаунта, код компьютера и дату — чтобы выдать ключ
+      для этого компьютера и связаться по программе; третьим лицам не передаётся. Удалить данные — напишите @mr_Alfaim,
+      удалим в течение 30 дней. Для бота также действует
+      <a href="https://telegram.org/privacy-tpa" target="_blank" rel="noopener">стандартная политика Telegram</a>.</p>
   </section>
 
   <footer>
